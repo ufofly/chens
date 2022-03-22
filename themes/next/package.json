@@ -32,5 +32,8 @@
   },
   "engines": {
     "node": ">=10.9.0"
+  },
+  "dependencies": {
+    "hexo-helper-live2d": "^3.1.1"
   }
 }
