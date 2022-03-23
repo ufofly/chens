@@ -9,24 +9,20 @@ tags:
 ```
 su - postgres
 psql 
-
 ```
-1.使用\password命令，为postgres用户设置一个密码。
-
+1. 使用\password命令，为postgres用户设置一个密码。
 ```
 \password  mima
-
 ```
-2.创建数据库用户dbuser（刚才创建的是Linux系统用户），并设置密码。
-`
+2. 创建数据库用户dbuser（刚才创建的是Linux系统用户），并设置密码。
+```
 CREATE USER dbuser WITH PASSWORD 'password';
-`
-3.创建用户数据库，这里为exampledb，并指定所有者为dbuser。
-`
+```
+3. 创建用户数据库，这里为exampledb，并指定所有者为dbuser。
+```
 CREATE DATABASE exampledb OWNER dbuser;
-`
-4.将exampledb数据库的所有权限都赋予dbuser，否则dbuser只能登录控制台，没有任何数据库操作权限。
+```
+4. 将exampledb数据库的所有权限都赋予dbuser，否则dbuser只能登录控制台，没有任何数据库操作权限。
 ```
 GRANT ALL PRIVILEGES ON DATABASE exampledb to dbuser;
-
 ```
