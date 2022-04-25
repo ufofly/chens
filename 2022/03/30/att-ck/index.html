@@ -4,13 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="centos7重置密码, 日拱一卒">
-    <meta name="description" content="操作步骤
-
-重启操作系统  
-当系统启动至引导界面，按任意键。然后将[光标]移动至待启动内核，按 e 编辑选中行。  
-移动光标至 kernel command line（linux16 开头的行）  
-移动至行末尾，增加 rd.break">
+    <meta name="keywords" content="att&amp;ck, 日拱一卒">
+    <meta name="description" content="Mitre 官方由抽象层次高低举例了三种网络攻击模型：高抽象模型：Lockheed Martin 的 Cyber Kill Chain 模型、Microsft 的 STRIDE 模型等中抽象模型：Mitre 的 ATT&amp;amp;CK 模型低">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>centos7重置密码 | 日拱一卒</title>
+    <title>att&amp;ck | 日拱一卒</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -270,12 +265,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">centos7重置密码</h1>
+                    <h1 class="description center-align post-title">att&amp;ck</h1>
                 </div>
             </div>
         </div>
@@ -403,7 +398,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-26
+                    2022-03-30
                 </div>
                 
 
@@ -424,32 +419,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>操作步骤</strong></p>
-<ol>
-<li>重启操作系统  </li>
-<li>当系统启动至引导界面，按任意键。然后将[光标]移动至待启动内核，按 e 编辑选中行。  </li>
-<li>移动光标至 kernel command line（linux16 开头的行）  </li>
-<li>移动至行末尾，增加 rd.break。  </li>
-<li>按 Ctrl +x 启动系统</li>
-<li>系统启动至 root shell 界面，此时，系统本身的 root 文件系统被以只读模式挂载到 &#x2F; sysroot 目录下  </li>
-<li>以读写模式重新挂载 &#x2F; sysroot</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">switch_root:/# mount -o remount,rw /sysroot</span><br><span class="line">#检查/sysroot是否以读写模式挂载</span><br><span class="line">switch_root:/# mount | grep sysroot</span><br><span class="line">/dev/mapper/centos-root on /sysroot type xfs(rw,relatime,attr2,inode64,noquota)</span><br></pre></td></tr></table></figure>
-<ol start="8">
-<li>执行 chroot 命令，将 &#x2F; sysroot 目录切换为根目录。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">switch_root:/# chroot /sysroot</span><br><span class="line">#chroot命令执行成功后，shell提示符将变为下述表示方法</span><br><span class="line">sh-4.2# </span><br></pre></td></tr></table></figure></li>
-</ol>
-<blockquote>
-<p>chroot jail 是什么？在 linux 操作系统中，默认的根目录都是‘&#x2F;’, 而 chroot 就是为改变正在运行的进程以及它的子进程的根目录而生。假设，某个程序的根目录从原先的默认的系统根目录‘&#x2F;’, 被你修改到 &#x2F; home 目录下，这个 &#x2F; home 目录就变成这个程序的逻辑根目录，那么，这个被修改了根目录环境的程序，就不能进入这个逻辑根目录以外的路径。本质上，这就是限制某个程序所能进入的目录树，所以，被称为 chroot 监狱。因此，这个程序的活动范围就从本来的整个系统 “&#x2F;“, 到后来的逻辑根 “&#x2F;home”。chroot(change root) 命令把根目录换成指定的目的目录。</p>
-</blockquote>
-<ol start="9">
-<li>创建一个新的密码  </li>
-<li>根目录下创建. autorelabel 文件，确保在系统启动时，未标记的文件自动标记。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#针对已启用selinux的主机，该步骤的目的是重新生成文件的标记，必不可少。</span><br><span class="line">sh-4.2# touch /.autorelabel</span><br></pre></td></tr></table></figure>
-<ol start="11">
-<li>键入两次 exit，第一次退出 chroot 环境，第二次退出 initramfs 调试 shell，系统会自动重启。  </li>
-<li>使用新密码正常登录。</li>
-</ol>
+                <h1 id="Mitre-官方由抽象层次高低举例了三种网络攻击模型："><a href="#Mitre-官方由抽象层次高低举例了三种网络攻击模型：" class="headerlink" title="Mitre 官方由抽象层次高低举例了三种网络攻击模型："></a>Mitre 官方由抽象层次高低举例了三种网络攻击模型：</h1><p>高抽象模型：Lockheed Martin 的 Cyber Kill Chain 模型、Microsft 的 STRIDE 模型等<br>中抽象模型：Mitre 的 ATT&amp;CK 模型<br>低抽象模型：漏洞数据集、恶意软件数据集等</p>
+<p>ATT&amp;CK 模型中有四个关键对象Tactics、Techniques、Groups 和 Software。</p>
 
                 
             </div>
@@ -476,7 +447,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://cshx.fun/2022/03/26/centos7%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81/">http://cshx.fun/2022/03/26/centos7%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81/</a>
+                    <a href="http://cshx.fun/2022/03/30/att-ck/">http://cshx.fun/2022/03/30/att-ck/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -687,13 +658,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/03/30/att&ck/">
+                <a href="/2022/04/07/linux-ying-ji-xiang-ying/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="att&amp;ck">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="linux应急响应">
                         
-                        <span class="card-title">att&amp;ck</span>
+                        <span class="card-title">linux应急响应</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -704,7 +675,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-30
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-07
                         </span>
                         <span class="publish-author">
                             
@@ -713,6 +684,14 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -724,13 +703,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/23/git1/">
+                <a href="/2022/03/26/centos7-chong-zhi-mi-ma/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="git1">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="centos7重置密码">
                         
-                        <span class="card-title">git1</span>
+                        <span class="card-title">centos7重置密码</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -741,7 +720,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-26
                             </span>
                         <span class="publish-author">
                             
