@@ -5,7 +5,7 @@ tags: linux
 ---
 ![](https://raw.githubusercontent.com/ufofly/picgo/master/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94.png)
 
-# 1、 账户安全
+# 1. 账户安全
 先查看基础用户信息文件(/etc/passwd，/etc/shadow，/etc/group)
 
 **/etc/shadow 字段说明**
@@ -87,7 +87,7 @@ lastb
 >3. 如何临时关闭一个账号?
 >临时关闭（锁定）一个用户帐号，并不需要修改该用户的密码。只需要在/etc/shadow文件里属于该用户的行的第二个字段（密码）前面加上星号`*`就可以了。星号`*`指的是该用户不允许登录。当你想要把该用户恢复正常，只需要把星号“*”去掉就可以了，用户就可以恢复正常。
 
-# 2、端口、进程、服务
+# 2.端口、进程、服务
 
 `使用netstat -antulp网络连接命令，分析可疑端口、IP、PID`
 
@@ -110,7 +110,7 @@ netstat -ntlp | grep 62333 | awk '{print $7}' | cut -d/ -f1 根据端口显示�
 
 
 
-# 3、linux持久化驻留方法
+# 3.linux持久化驻留方法
 
 ### 检查是否存在可疑定时任务
 
@@ -166,7 +166,7 @@ grep "Failed password" /var/log/secure|perl -e 'while($_=<>){ /for(.*?) from/; p
 
 SSH爆破是Linux病毒最常用的传播手段，若存在弱密码的主机很容易被其他感染主机SSH爆破成功，从而再次感染病毒。
 
-# 4、日志分析
+# 4.日志分析
 
 ```bash
 日志默认存放位置：/var/log/
