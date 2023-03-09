@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="20230303, 日拱一卒">
-    <meta name="description" content="excel 按ip排序=SUMPRODUCT(MID(SUBSTITUTE(A1,&amp;quot;.&amp;quot;,REPT(&amp;quot; &amp;quot;,20)),&amp;#123;1,21,41,61&amp;#125;,20)*10^&amp;#123;9,6,3">
+    <meta name="description" content="excel 按ip排序excel方式=SUMPRODUCT(MID(SUBSTITUTE(A1,&amp;quot;.&amp;quot;,REPT(&amp;quot; &amp;quot;,20)),&amp;#123;1,21,41,61&amp;#125;,20)*10^&amp;#12">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -397,11 +397,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="excel-按ip排序"><a href="#excel-按ip排序" class="headerlink" title="excel 按ip排序"></a>excel 按ip排序</h1><p><code>=SUMPRODUCT(MID(SUBSTITUTE(A1,&quot;.&quot;,REPT(&quot; &quot;,20)),&#123;1,21,41,61&#125;,20)*10^&#123;9,6,3,0&#125;) </code></p>
+                <h1 id="excel-按ip排序"><a href="#excel-按ip排序" class="headerlink" title="excel 按ip排序"></a>excel 按ip排序</h1><h2 id="excel方式"><a href="#excel方式" class="headerlink" title="excel方式"></a>excel方式</h2><p><code>=SUMPRODUCT(MID(SUBSTITUTE(A1,&quot;.&quot;,REPT(&quot; &quot;,20)),&#123;1,21,41,61&#125;,20)*10^&#123;9,6,3,0&#125;) </code></p>
 <ol>
 <li>选中一个空的单元格</li>
 <li>粘贴函数，函数中的A1代表IP地址的列，根据实际表格修改。</li>
 </ol>
+<h2 id="sort命令方式"><a href="#sort命令方式" class="headerlink" title="sort命令方式"></a>sort命令方式</h2><p><code>sort  -t &quot;.&quot; -k1n,1 -k2n,2 -k3n,3 -k4n,4 ip.txt</code></p>
 
                 
             </div>
@@ -635,18 +636,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/03/03/20230303/">
+                <a href="/2023/03/07/20230307/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="20230303">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="20230307">
                         
-                        <span class="card-title">20230303</span>
+                        <span class="card-title">20230307</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -656,9 +656,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-03
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-07
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -667,7 +667,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/javascript/">
+                        <span class="chip bg-color">javascript</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
