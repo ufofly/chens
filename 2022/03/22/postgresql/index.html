@@ -401,12 +401,13 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>初次安装后，默认生成一个名为postgres的数据库和一个名为postgres的数据库用户。这里需要注意的是，同时还生成了一个名为postgres的Linux系统用户。这时相当于系统用户postgres以同名数据库用户的身份，登录数据库，这是不用输入密码的。如果一切正常，系统提示符会变为”postgres&#x3D;#”，表示这时已经进入了数据库控制台。以下的命令都在控制台内完成。<br>切换到postgres</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su - postgres</span><br><span class="line">psql </span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">su - postgres
+psql <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ol>
-<li>使用\password命令，为postgres用户设置一个密码。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\password  mima</span><br></pre></td></tr></table></figure></li>
-<li>创建数据库用户dbuser（刚才创建的是Linux系统用户），并设置密码。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER dbuser WITH PASSWORD &#x27;password&#x27;;</span><br></pre></td></tr></table></figure></li>
-<li>创建用户数据库，这里为exampledb，并指定所有者为dbuser。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE exampledb OWNER dbuser;</span><br></pre></td></tr></table></figure></li>
-<li>将exampledb数据库的所有权限都赋予dbuser，否则dbuser只能登录控制台，没有任何数据库操作权限。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON DATABASE exampledb to dbuser;</span><br></pre></td></tr></table></figure></li>
+<li>使用\password命令，为postgres用户设置一个密码。<pre class="line-numbers language-none"><code class="language-none">\password  mima<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>创建数据库用户dbuser（刚才创建的是Linux系统用户），并设置密码。<pre class="line-numbers language-none"><code class="language-none">CREATE USER dbuser WITH PASSWORD &#39;password&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>创建用户数据库，这里为exampledb，并指定所有者为dbuser。<pre class="line-numbers language-none"><code class="language-none">CREATE DATABASE exampledb OWNER dbuser;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>将exampledb数据库的所有权限都赋予dbuser，否则dbuser只能登录控制台，没有任何数据库操作权限。<pre class="line-numbers language-none"><code class="language-none">GRANT ALL PRIVILEGES ON DATABASE exampledb to dbuser;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ol>
 
                 

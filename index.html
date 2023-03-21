@@ -496,11 +496,9 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                firewall查看服务的状态1firewall-cmd --state
+                                firewall查看服务的状态firewall-cmd --state
 
-永久配置存储位置1firewall的每个区域的永久配置存储在/usr/lib/firewalld/zones/ 目录中
-
-使新设置持久1firewall-cmd -
+永久配置存储位置firewall的每个区域的永久配置存储在&#x2F;usr&#x2F;lib&#x2F;firewalld&#x2F;zones&#x2F; 目录中
                             
                         </div>
                         <div class="publish-info">
@@ -537,7 +535,7 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                nmap 快速端口扫描1234567891011121314nmap -sS -Pn -n --open --min-hostgroup 4 --min-parallelism 1024 --host-timeout 30 -T4 -v -
+                                nmap 快速端口扫描nmap -sS -Pn -n --open --min-hostgroup 4 --min-parallelism 1024 --host-timeout 30 -T4 -v -p1-65535 -oG result
                             
                         </div>
                         <div class="publish-info">
@@ -908,7 +906,10 @@ lsass.exe “Local Security Authority Service本地安全权限服务”
                         <div class="summary block-with-text">
                             
                                 git显示中文乱码git status 查看改动发现中文乱码
-1234git config --global core.quotepath false加上后在git配置文件.gitconfig会出现[core]        quotepa
+git config --global core.quotepath false
+加上后在git配置文件.gitconfig会出现
+[core]
+        quotepat
                             
                         </div>
                         <div class="publish-info">
