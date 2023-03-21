@@ -400,21 +400,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="nmap-快速端口扫描"><a href="#nmap-快速端口扫描" class="headerlink" title="nmap 快速端口扫描"></a>nmap 快速端口扫描</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap -sS -Pn -n --open --min-hostgroup <span class="token number">4</span> --min-parallelism <span class="token number">1024</span> --host-timeout <span class="token number">30</span> -T4 -v -p1-65535 -oG result.txt -iL ip.txt
+                <h2 id="nmap-快速端口扫描"><a href="#nmap-快速端口扫描" class="headerlink" title="nmap 快速端口扫描"></a>nmap 快速端口扫描</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap -sS -Pn -n --open --min-hostgroup <span class="token number">4</span> --min-parallelism <span class="token number">1024</span> --host-timeout <span class="token number">30</span> -T4 -v -p1-65535 -oG result.txt -iL ip.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
--sS：使用SYN方式扫描，默认用的是-sT方式，即TCP方式，需要完成完整的三次握手，比较费时，SYN就比较快一些了；
--Pn： 禁用PING检测，这样速度快，并且可以防止有些主机无法ping通而被漏掉不扫描；
--n： 功能未知；
-–open： 只输出检测状态为open的端口，即开放的端口；
-–min-hostgroup <span class="token number">4</span>：调整并行扫描组的大小；
-–min-parallelism <span class="token number">1024</span>：调整探测报文的并行度；
-–host-timeout <span class="token number">30</span>：检测超时的跳过
--T4：总共有T0-T5，貌似T4比较折中
--v：打印详细扫描过程
--oG：输出为比较人性化的格式，一条记录一行，后期好处理
--iL：载入ip段文件，批量扫，不用一条条执行了。
--p 端口<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<p>-sS：使用SYN方式扫描，默认用的是-sT方式，即TCP方式，需要完成完整的三次握手，比较费时，SYN就比较快一些了；<br>-Pn： 禁用PING检测，这样速度快，并且可以防止有些主机无法ping通而被漏掉不扫描；<br>-n： 功能未知；<br>–open： 只输出检测状态为open的端口，即开放的端口；<br>–min-hostgroup 4：调整并行扫描组的大小；<br>–min-parallelism 1024：调整探测报文的并行度；<br>–host-timeout 30：检测超时的跳过<br>-T4：总共有T0-T5，貌似T4比较折中<br>-v：打印详细扫描过程<br>-oG：输出为比较人性化的格式，一条记录一行，后期好处理<br>-iL：载入ip段文件，批量扫，不用一条条执行了。<br>-p 端口</p>
 
                 
             </div>
