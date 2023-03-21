@@ -6,13 +6,14 @@ tags: linux
 ![](https://raw.githubusercontent.com/ufofly/picgo/master/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94.png)
 
 # 1. 账户安全
+
 先查看基础用户信息文件(/etc/passwd，/etc/shadow，/etc/group)
 
 **/etc/shadow 字段说明**
 
 `登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志`
 
-```
+
 1）“登录名”是与/etc/passwd文件中的登录名相一致的用户账号
 2）“口令”字段存放的是加密后的用户口令字，如果为空，则对应用户没有口令，登录时不需要口令；   
 星号代表帐号被锁定；
@@ -27,11 +28,11 @@ $5$ 是用 SHA-256加密的。
 6）“警告时间”字段表示的是从系统开始警告用户到用户密码正式失效之间的天数。
 7）“不活动时间”表示的是用户没有登录活动但账号仍能保持有效的最大天数。
 8）“失效时间”字段给出的是一个绝对的天数，如果使用了这个字段，那么就给出相应账号的生存期。期满后，该账号就不再是一个合法的账号，也就不能再用来登录了。
-```
 
 
 
-```bash
+
+
 1、查询特权用户特权用户(uid 为0),sudo特权用户
 awk -F: '$3==0{print $1}' /etc/passwd
 more /etc/sudoers | grep -v "^#\|^$" | grep "ALL=(ALL)"
@@ -64,7 +65,7 @@ last    #查看所有用户的登录注销信息及系统的启动、重启及�
 lastb   #查看用户错误的登录列表
 
 last
-# 显示logged in表示用户还在登录
+#显示logged in表示用户还在登录
 # pts表示从SSH远程登录
 # tty表示从控制台登录，就是在服务器旁边登录
 
@@ -77,21 +78,20 @@ lastb
 命令排查黑客什么时间登录的有的黑客登录时，会将/var/log/wtmp文件删除或者清空，这样就无法使用last命令获得有用的信息了。在做系统加固的时候可以使用 chattr +a 对 /var/log/wtmp 文件进行锁定，避免被黑客删除。
 
 
-```
 
->1. linux的密码/etc/passwd中,只显示一个x,真正的密码放在/etc/shadow中
->2. 密码的三种状态
->`$`长度34个字符的经过md5混编的不可逆密码
->`!!` :两个叹号: 表示这个帐号目前没有密码，也不能用来登录，通常为一些系统帐号
->`*` : 星号,使此账号无法登入
->3. 如何临时关闭一个账号?
->临时关闭（锁定）一个用户帐号，并不需要修改该用户的密码。只需要在/etc/shadow文件里属于该用户的行的第二个字段（密码）前面加上星号`*`就可以了。星号`*`指的是该用户不允许登录。当你想要把该用户恢复正常，只需要把星号“*”去掉就可以了，用户就可以恢复正常。
+1. linux的密码/etc/passwd中,只显示一个x,真正的密码放在/etc/shadow中
+2. 密码的三种状态
+`$`长度34个字符的经过md5混编的不可逆密码
+`!!` :两个叹号: 表示这个帐号目前没有密码，也不能用来登录，通常为一些系统帐号
+`*` : 星号,使此账号无法登入
+3. 如何临时关闭一个账号?
+临时关闭（锁定）一个用户帐号，并不需要修改该用户的密码。只需要在/etc/shadow文件里属于该用户的行的第二个字段（密码）前面加上星号`*`就可以了。星号`*`指的是该用户不允许登录。当你想要把该用户恢复正常，只需要把星号“*”去掉就可以了，用户就可以恢复正常。
 
 # 2.端口、进程、服务
 
 `使用netstat -antulp网络连接命令，分析可疑端口、IP、PID`
 
-```bash
+
 ls -l /proc/$PID/exe 查看下pid所对应的进程文件路径
 file /proc/$PID/exe  查看下pid所对应的进程文件路径
 lsof -i:xx 查看某个端口是哪个进程打开的
@@ -105,22 +105,20 @@ netstat -nat | awk '{print $6}'| sort | uniq -c | sort -rn 统计tcp连接状态
 netstat -anlp | grep 80 | grep tcp | awk ‘{print $5}’ | awk -F: ‘{print $1}’ | sort | uniq -c | sort -nr | head -n 20  查看tcp 80端口请求的ip
 netstat -ntlp | grep 62333 | awk '{print $7}' | cut -d/ -f1 根据端口显示进程号
 
-```
+
 
 
 
 
 # 3.linux持久化驻留方法
 
-### 检查是否存在可疑定时任务
+## 检查是否存在可疑定时任务
 
 枚举定时任务：crontab-l      
 
 查看anacron异步定时任务：cat /etc/anacrontab
 
-
-
-### 检查是否存在可疑服务
+## 检查是否存在可疑服务
 
 枚举主机所有服务，查看是否有恶意服务：
 
@@ -128,7 +126,7 @@ netstat -ntlp | grep 62333 | awk '{print $7}' | cut -d/ -f1 根据端口显示�
 
 `centos7 systemctl list-units`
 
-### 扫描是否存在恶意驱动
+## 扫描是否存在恶意驱动
 
 枚举/扫描系统驱动：lsmod
 
@@ -138,13 +136,9 @@ netstat -ntlp | grep 62333 | awk '{print $7}' | cut -d/ -f1 根据端口显示�
 
 `https://sourceforge.net/projects/rkhunter/`
 
-### ssh弱口令
+## ssh弱口令
 
-
-
-
-
-### 检查是否有被攻击痕迹
+## 检查是否有被攻击痕迹
 
 查询log主机登陆日志：
 
@@ -217,13 +211,7 @@ sudo -l
 Jul 10 00:43:09 localhost sudo:    good : TTY=pts/4 ; PWD=/home/good ; USER=root ; COMMAND=/sbin/shutdown -r now
 ```
 
-
-
----
-
-
-
-#### utmp、wtmp、btmp文件
+utmp、wtmp、btmp文件
 
 Linux用户登录信息放在三个文件中：
 
@@ -233,7 +221,7 @@ Linux用户登录信息放在三个文件中：
 
 /var/log/btmp：记录失败的登录尝试信息，默认由lastb命令查看。
 
-#### 相关命令介绍
+相关命令介绍
 
 查看这三个日志文件的命令，分别是lastlog、last、lastb、ac、who、w、users、utmpdump。其中last、lastb、who、utmpdump可以通过指定参数而查看三个中的任意一个文件。
 
