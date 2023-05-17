@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="329, 日拱一卒">
-    <meta name="description" content="linux普通用户密钥登录放在普通用户的目录里面
-内网主机通过防火墙转发借助可以访问外网的内网主机访问外网两台VMware虚拟机，都是centos7.6。
-外网主机ip:192.168.80.10,192.168.10.138
-内网主机ip">
+    <meta name="keywords" content="313, 日拱一卒">
+    <meta name="description" content="nmap 快速端口扫描nmap -sS -Pn -n --open --min-hostgroup 4 --min-parallelism 1024 --host-timeout 30 -T4 -v -p1-65535 -oG result">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>329 | 日拱一卒</title>
+    <title>313 | 日拱一卒</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -246,12 +243,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">329</h1>
+                    <h1 class="description center-align post-title">313</h1>
                 </div>
             </div>
         </div>
@@ -379,7 +376,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-03-29
+                    2023-03-13
                 </div>
                 
 
@@ -403,19 +400,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><p>普通用户密钥登录放在普通用户的目录里面</p>
-<h1 id="内网主机通过防火墙转发借助可以访问外网的内网主机访问外网"><a href="#内网主机通过防火墙转发借助可以访问外网的内网主机访问外网" class="headerlink" title="内网主机通过防火墙转发借助可以访问外网的内网主机访问外网"></a>内网主机通过防火墙转发借助可以访问外网的内网主机访问外网</h1><p>两台VMware虚拟机，都是centos7.6。</p>
-<p>外网主机ip:192.168.80.10,192.168.10.138</p>
-<p>内网主机ip:192.168.10.140</p>
-<ol>
-<li><h5 id="在带外网的机器上设置iptables规则或者firewall-cmd规则："><a href="#在带外网的机器上设置iptables规则或者firewall-cmd规则：" class="headerlink" title="在带外网的机器上设置iptables规则或者firewall-cmd规则："></a>在带外网的机器上设置iptables规则或者firewall-cmd规则：</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables -t nat -A POSTROUTING -s <span class="token number">192.168</span>.10.140 -j SNAT --to <span class="token number">192.168</span>.80.10  <span class="token comment"># iptables</span>
-firewall-cmd  --permanent --direct --passthrough ipv4 -t nat -A POSTROUTING -s <span class="token number">192.168</span>.10.140 -j SNAT --to-source <span class="token number">192.168</span>.80.50  <span class="token comment">#firewall-cmd</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li><h5 id="在带带外网机器上打开转发"><a href="#在带带外网机器上打开转发" class="headerlink" title="在带带外网机器上打开转发"></a>在带带外网机器上打开转发</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> net.ipv4.ip_forward<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">>></span> /etc/sysctl.conf
-sysctl -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li><h5 id="在内网机器上，设置其网关为-192-168-10-138"><a href="#在内网机器上，设置其网关为-192-168-10-138" class="headerlink" title="在内网机器上，设置其网关为 192.168.10.138"></a>在内网机器上，设置其网关为 192.168.10.138</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">route <span class="token function">add</span> default gw <span class="token number">192.168</span>.10.138<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ol>
+                <h2 id="nmap-快速端口扫描"><a href="#nmap-快速端口扫描" class="headerlink" title="nmap 快速端口扫描"></a>nmap 快速端口扫描</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap -sS -Pn -n --open --min-hostgroup <span class="token number">4</span> --min-parallelism <span class="token number">1024</span> --host-timeout <span class="token number">30</span> -T4 -v -p1-65535 -oG result.txt -iL ip.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>-sS：使用SYN方式扫描，默认用的是-sT方式，即TCP方式，需要完成完整的三次握手，比较费时，SYN就比较快一些了；<br>-Pn： 禁用PING检测，这样速度快，并且可以防止有些主机无法ping通而被漏掉不扫描；<br>-n： 功能未知；<br>–open： 只输出检测状态为open的端口，即开放的端口；<br>–min-hostgroup 4：调整并行扫描组的大小；<br>–min-parallelism 1024：调整探测报文的并行度；<br>–host-timeout 30：检测超时的跳过<br>-T4：总共有T0-T5，貌似T4比较折中<br>-v：打印详细扫描过程<br>-oG：输出为比较人性化的格式，一条记录一行，后期好处理<br>-iL：载入ip段文件，批量扫，不用一条条执行了。<br>-p 端口</p>
 
                 
             </div>
@@ -442,7 +429,7 @@ sysctl -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://cshx.fun/2023/03/29/0329/">http://cshx.fun/2023/03/29/0329/</a>
+                    <a href="http://cshx.fun/2023/03/13/nmap-sao-miao-you-hua/">http://cshx.fun/2023/03/13/nmap-sao-miao-you-hua/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -527,13 +514,13 @@ sysctl -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/04/24/0424/">
+                <a href="/2023/03/21/firewall-jiao-cheng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="424">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="321">
                         
-                        <span class="card-title">424</span>
+                        <span class="card-title">321</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -544,7 +531,7 @@ sysctl -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-24
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-21
                         </span>
                         <span class="publish-author">
                             
@@ -564,13 +551,13 @@ sysctl -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/03/27/0327/">
+                <a href="/2023/03/10/0310-sui-shou-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="327">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="310">
                         
-                        <span class="card-title">327</span>
+                        <span class="card-title">310</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -581,7 +568,7 @@ sysctl -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-10
                             </span>
                         <span class="publish-author">
                             

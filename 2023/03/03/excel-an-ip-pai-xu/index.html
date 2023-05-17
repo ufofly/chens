@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="313, 日拱一卒">
-    <meta name="description" content="nmap 快速端口扫描nmap -sS -Pn -n --open --min-hostgroup 4 --min-parallelism 1024 --host-timeout 30 -T4 -v -p1-65535 -oG result">
+    <meta name="keywords" content="20230303, 日拱一卒">
+    <meta name="description" content="excel 按ip排序excel方式&amp;#x3D;SUMPRODUCT(MID(SUBSTITUTE(B2,&amp;quot;.&amp;quot;,REPT(&amp;quot; &amp;quot;,20)),&amp;#123;1,21,41,61&amp;#125;,20)*10">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>313 | 日拱一卒</title>
+    <title>20230303 | 日拱一卒</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -243,12 +243,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">313</h1>
+                    <h1 class="description center-align post-title">20230303</h1>
                 </div>
             </div>
         </div>
@@ -376,7 +376,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-03-13
+                    2023-03-03
                 </div>
                 
 
@@ -400,9 +400,14 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="nmap-快速端口扫描"><a href="#nmap-快速端口扫描" class="headerlink" title="nmap 快速端口扫描"></a>nmap 快速端口扫描</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap -sS -Pn -n --open --min-hostgroup <span class="token number">4</span> --min-parallelism <span class="token number">1024</span> --host-timeout <span class="token number">30</span> -T4 -v -p1-65535 -oG result.txt -iL ip.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h1 id="excel-按ip排序"><a href="#excel-按ip排序" class="headerlink" title="excel 按ip排序"></a>excel 按ip排序</h1><h2 id="excel方式"><a href="#excel方式" class="headerlink" title="excel方式"></a>excel方式</h2><pre class="line-numbers language-none"><code class="language-none">&#x3D;SUMPRODUCT(MID(SUBSTITUTE(B2,&quot;.&quot;,REPT(&quot; &quot;,20)),&#123;1,21,41,61&#125;,20)*10^&#123;9,6,3,0&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>-sS：使用SYN方式扫描，默认用的是-sT方式，即TCP方式，需要完成完整的三次握手，比较费时，SYN就比较快一些了；<br>-Pn： 禁用PING检测，这样速度快，并且可以防止有些主机无法ping通而被漏掉不扫描；<br>-n： 功能未知；<br>–open： 只输出检测状态为open的端口，即开放的端口；<br>–min-hostgroup 4：调整并行扫描组的大小；<br>–min-parallelism 1024：调整探测报文的并行度；<br>–host-timeout 30：检测超时的跳过<br>-T4：总共有T0-T5，貌似T4比较折中<br>-v：打印详细扫描过程<br>-oG：输出为比较人性化的格式，一条记录一行，后期好处理<br>-iL：载入ip段文件，批量扫，不用一条条执行了。<br>-p 端口</p>
+
+<ol>
+<li>选中一个空的单元格</li>
+<li>粘贴函数，函数中的A1代表IP地址的列，根据实际表格修改。</li>
+</ol>
+<h2 id="sort命令方式"><a href="#sort命令方式" class="headerlink" title="sort命令方式"></a>sort命令方式</h2><p><code>sort  -t &quot;.&quot; -k1n,1 -k2n,2 -k3n,3 -k4n,4 ip.txt</code></p>
 
                 
             </div>
@@ -429,7 +434,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://cshx.fun/2023/03/13/0313/">http://cshx.fun/2023/03/13/0313/</a>
+                    <a href="http://cshx.fun/2023/03/03/excel-an-ip-pai-xu/">http://cshx.fun/2023/03/03/excel-an-ip-pai-xu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -514,13 +519,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/03/21/0321/">
+                <a href="/2023/03/07/sui-shou-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="321">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="20230307">
                         
-                        <span class="card-title">321</span>
+                        <span class="card-title">20230307</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -531,7 +536,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-21
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-07
                         </span>
                         <span class="publish-author">
                             
@@ -540,6 +545,14 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/javascript/">
+                        <span class="chip bg-color">javascript</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -551,13 +564,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/03/10/0310/">
+                <a href="/2022/11/08/shi-zhan-hua-bai-mao-ren-cai-neng-li-ge-xiang-ji-neng-xiang-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="310">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="实战化白帽人才能力各项技能详解">
                         
-                        <span class="card-title">310</span>
+                        <span class="card-title">实战化白帽人才能力各项技能详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -568,7 +581,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-08
                             </span>
                         <span class="publish-author">
                             

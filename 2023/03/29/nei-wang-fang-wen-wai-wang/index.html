@@ -4,12 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="git1, 日拱一卒">
-    <meta name="description" content="git显示中文乱码git status 查看改动发现中文乱码
-git config --global core.quotepath false
-加上后在git配置文件.gitconfig会出现
-[core]
-        quotepat">
+    <meta name="keywords" content="329, 日拱一卒">
+    <meta name="description" content="linux普通用户密钥登录放在普通用户的目录里面
+内网主机通过防火墙转发借助可以访问外网的内网主机访问外网两台VMware虚拟机，都是centos7.6。
+外网主机ip:192.168.80.10,192.168.10.138
+内网主机ip">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +20,7 @@ git config --global core.quotepath false
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>git1 | 日拱一卒</title>
+    <title>329 | 日拱一卒</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -247,12 +246,12 @@ git config --global core.quotepath false
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">git1</h1>
+                    <h1 class="description center-align post-title">329</h1>
                 </div>
             </div>
         </div>
@@ -380,7 +379,7 @@ git config --global core.quotepath false
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-23
+                    2023-03-29
                 </div>
                 
 
@@ -404,13 +403,20 @@ git config --global core.quotepath false
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="git显示中文乱码"><a href="#git显示中文乱码" class="headerlink" title="git显示中文乱码"></a>git显示中文乱码</h1><p>git status 查看改动发现中文乱码</p>
-<pre class="line-numbers language-none"><code class="language-none">git config --global core.quotepath false
-加上后在git配置文件.gitconfig会出现
-[core]
-        quotepath &#x3D; false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+                <h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><p>普通用户密钥登录放在普通用户的目录里面</p>
+<h1 id="内网主机通过防火墙转发借助可以访问外网的内网主机访问外网"><a href="#内网主机通过防火墙转发借助可以访问外网的内网主机访问外网" class="headerlink" title="内网主机通过防火墙转发借助可以访问外网的内网主机访问外网"></a>内网主机通过防火墙转发借助可以访问外网的内网主机访问外网</h1><p>两台VMware虚拟机，都是centos7.6。</p>
+<p>外网主机ip:192.168.80.10,192.168.10.138</p>
+<p>内网主机ip:192.168.10.140</p>
+<ol>
+<li><h5 id="在带外网的机器上设置iptables规则或者firewall-cmd规则："><a href="#在带外网的机器上设置iptables规则或者firewall-cmd规则：" class="headerlink" title="在带外网的机器上设置iptables规则或者firewall-cmd规则："></a>在带外网的机器上设置iptables规则或者firewall-cmd规则：</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables -t nat -A POSTROUTING -s <span class="token number">192.168</span>.10.140 -j SNAT --to <span class="token number">192.168</span>.80.10  <span class="token comment"># iptables</span>
+firewall-cmd  --permanent --direct --passthrough ipv4 -t nat -A POSTROUTING -s <span class="token number">192.168</span>.10.140 -j SNAT --to-source <span class="token number">192.168</span>.80.50  <span class="token comment">#firewall-cmd</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><h5 id="在带带外网机器上打开转发"><a href="#在带带外网机器上打开转发" class="headerlink" title="在带带外网机器上打开转发"></a>在带带外网机器上打开转发</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> net.ipv4.ip_forward<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">>></span> /etc/sysctl.conf
+sysctl -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><h5 id="在内网机器上，设置其网关为-192-168-10-138"><a href="#在内网机器上，设置其网关为-192-168-10-138" class="headerlink" title="在内网机器上，设置其网关为 192.168.10.138"></a>在内网机器上，设置其网关为 192.168.10.138</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">route <span class="token function">add</span> default gw <span class="token number">192.168</span>.10.138<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
 
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
                 
             </div>
             <hr/>
@@ -436,7 +442,7 @@ git config --global core.quotepath false
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://cshx.fun/2022/03/23/git1/">http://cshx.fun/2022/03/23/git1/</a>
+                    <a href="http://cshx.fun/2023/03/29/nei-wang-fang-wen-wai-wang/">http://cshx.fun/2023/03/29/nei-wang-fang-wen-wai-wang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -521,13 +527,13 @@ git config --global core.quotepath false
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/03/26/centos7-chong-zhi-mi-ma/">
+                <a href="/2023/04/24/fan-dan-shell/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="centos7重置密码">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="424">
                         
-                        <span class="card-title">centos7重置密码</span>
+                        <span class="card-title">424</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -538,7 +544,7 @@ git config --global core.quotepath false
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-26
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-24
                         </span>
                         <span class="publish-author">
                             
@@ -558,13 +564,13 @@ git config --global core.quotepath false
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/22/postgresql/">
+                <a href="/2023/03/27/javascript-han-shu-biao-da-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="postgresql">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="327">
                         
-                        <span class="card-title">postgresql</span>
+                        <span class="card-title">327</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -575,7 +581,7 @@ git config --global core.quotepath false
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-27
                             </span>
                         <span class="publish-author">
                             
