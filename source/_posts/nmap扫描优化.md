@@ -11,7 +11,7 @@ nmap -sS -Pn -n --open --min-hostgroup 4 --min-parallelism 1024 --host-timeout 3
 
 -sS：使用SYN方式扫描，默认用的是-sT方式，即TCP方式，需要完成完整的三次握手，比较费时，SYN就比较快一些了；
 -Pn： 禁用PING检测，这样速度快，并且可以防止有些主机无法ping通而被漏掉不扫描；
--n： 功能未知；
+-n： 不进行dns解析；
 –open： 只输出检测状态为open的端口，即开放的端口；
 –min-hostgroup 4：调整并行扫描组的大小；
 –min-parallelism 1024：调整探测报文的并行度；
