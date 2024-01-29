@@ -4,17 +4,17 @@
   
     
     <entry>
-      <title>php相关</title>
-      <link href="/2023/12/01/php-xiang-guan/"/>
-      <url>/2023/12/01/php-xiang-guan/</url>
+      <title>web安全之csrf</title>
+      <link href="/2024/01/29/csrf/"/>
+      <url>/2024/01/29/csrf/</url>
       
-        <content type="html"><![CDATA[<p>学习好难啊</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="1-csrf介绍"><a href="#1-csrf介绍" class="headerlink" title="1.csrf介绍"></a>1.csrf介绍</h1><p>跨站点请求伪造（Cross Site Request Forgery）被称作 CSRF。CSRF的其他称呼CSRF 也被称作 XSRF，会话叠置（Session Riding），跨站点引用伪造（Cross-Site Reference Forgery），恶意连接（Hostile Linking），一键攻击（One-Click Attack）。CSRF是一种web网络攻击，它利用用户在已经登录某个网站的情况下，通过伪装成合法用户的请求来执行非法操作。攻击者通过欺骗用户让其浏览器访问之前已认证过的站点，并在用户不知情的情况下触发了包含恶意操作的请求。这种攻击方式限制在已通过身份验证的用户的功能范围内，因此可执行的恶意操作通常涉及该用户在目标网站上具备的权限，如修改账号信息、转账等。如果受害者是系统管理员，攻击的危害可能更为严重。</p><h1 id="2-攻击流程"><a href="#2-攻击流程" class="headerlink" title="2.攻击流程"></a>2.攻击流程</h1><p>一个典型的CSRF攻击有着如下的流程：<br>1.受害者登录a.com，并保留了登录凭证（Cookie）。<br>2.攻击者引诱受害者访问了b.com。<br>3.b.com 向 a.com 发送了一个请求：a.com&#x2F;act&#x3D;xx。浏览器会默认携带a.com的Cookie。<br>4.a.com接收到请求后，对请求进行验证，并确认是受害者的凭证，误以为是受害者自己发送的请求。<br>5.a.com以受害者的名义执行了act&#x3D;xx。<br>6.攻击完成，攻击者在受害者不知情的情况下，冒充受害者，让a.com执行了自己定义的操作。</p><h1 id="3-csrf攻击特点，条件，防御手段"><a href="#3-csrf攻击特点，条件，防御手段" class="headerlink" title="3.csrf攻击特点，条件，防御手段"></a>3.csrf攻击特点，条件，防御手段</h1><h2 id="攻击特点"><a href="#攻击特点" class="headerlink" title="攻击特点"></a>攻击特点</h2><ol><li><strong>攻击发起在第三方网站</strong>：攻击者一般会在受害者常访问的网站上加载恶意代码，发起攻击。</li><li><strong>利用受害者的登录凭证</strong>：攻击者会利用受害者在被攻击网站的登录凭证，冒充受害者提交操作。</li><li><strong>跨站请求</strong>：攻击者会用各种方式发起跨站请求，例如：图片URL、超链接、CORS、Form提交等。</li><li><strong>难以追踪</strong>：部分攻击方式可以直接嵌入在第三方论坛、文章中，使得攻击来源难以追踪。</li><li><strong>通常是跨域的</strong>：因为外域通常更容易被攻击者掌控。但如果本域下有容易被利用的功能，攻击者可以直接在本域下发起攻击。</li></ol><h2 id="攻击条件"><a href="#攻击条件" class="headerlink" title="攻击条件"></a>攻击条件</h2><ol><li><strong>网站存在值得攻击的功能</strong>：攻击者会寻找可以修改邮箱、密码、转账、手机号等功能的网站。</li><li><strong>基于cookie的会话处理</strong>：网站对于客户端请求只通过cookie进行用户验证，没有其他的会话跟踪和用户验证机制。</li><li><strong>没有不可预测的参数</strong>：比如修改密码时需要输入验证码或原密码，这两个参数攻击者既不知道也猜不到，功能就不会被CSRF成功攻击。</li></ol><h2 id="防御手段"><a href="#防御手段" class="headerlink" title="防御手段"></a>防御手段</h2><ol><li><strong>验证请求来源</strong>：在接收到请求时，检查请求来源，确保请求来自可信来源。</li><li><strong>使用验证码或二次验证</strong>：添加验证码或二次验证机制，确保请求可信。</li><li><strong>设置token</strong>：在请求中添加唯一token，验证请求的合法性。</li></ol><h1 id="4-测试方法"><a href="#4-测试方法" class="headerlink" title="4.测试方法"></a>4.测试方法</h1><p>CSRF（跨站请求伪造）的测试方法通常包括以下步骤：</p><ol><li><strong>设置代理</strong>：首先，在浏览器中设置代理，使用Burp Suite作为代理服务器。这可以通过安装相应的插件并在浏览器中配置代理设置来完成。</li><li><strong>注册用户并修改密码</strong>：打开待测试的网站，注册一个新用户并登录。然后，在网站上修改密码。</li><li><strong>抓包分析</strong>：使用Burp Suite抓取与密码修改相关的请求和响应包。这有助于了解请求的详细信息，例如请求方法和参数。</li><li><strong>构造CSRF请求</strong>：在Burp Suite中，右键单击选定的请求，选择“参与工具”&#x2F;“生成CSRF PoC”。这将生成一个包含CSRF攻击代码的HTML页面。</li><li><strong>修改CSRF请求</strong>：根据需要，可以修改CSRF PoC中的参数，例如将目标邮箱更改为攻击者的邮箱。</li><li><strong>测试CSRF攻击</strong>：将生成的CSRF HTML页面粘贴到攻击者的浏览器中并打开。点击页面上的“提交请求”按钮，攻击者应该能够成功执行目标操作，例如修改受害者的密码。</li><li><strong>检查结果</strong>：在Burp Suite中观察代理请求和响应。如果密码被成功修改，并且响应显示“密码修改成功”，那么说明该网站存在CSRF漏洞。</li></ol><h1 id="5-csrf和css的区别"><a href="#5-csrf和css的区别" class="headerlink" title="5.csrf和css的区别"></a>5.csrf和css的区别</h1><p>相同点：</p><ol><li>攻击者把恶意代码放在其自己控制的网站上，诱导受害者访问这个网站</li><li>通过邮件、短信、社交软件进行传播</li><li>放在存在该漏洞的网站上，等待有缘人，比如评论区</li></ol><p>不同点：</p><ol><li>XSS 允许攻击者在受害者的浏览器上执行 js 代码；而 CSRF 不行</li><li>XSS 通过窃取受害者的 cookie 来实现账号接管，如果目标站点使用了 httponly 这就行不通了；CSRF 通过浏览器发起请求，自动携带受害者的cookie信息，即使有 httponly 也不影响 CSRF 攻击的实现</li><li>XSS 的危害更大。攻击者如果成功实现了 XSS 攻击，那通常意味着他可以使用受害者在这个网站的所有功能，而 CSRF 只限于特定的存在漏洞的功能</li><li>CSRF 无法让攻击者获取到服务器返回的数据，由于请求是由受害者的浏览器发起的，那么服务器的响应最后还是给到了受害者那里，攻击者是拿不到这部分数据的，所以对于一些查询类功能，即便没有做任何防御 CSRF 的措施，它也几乎是没有利用价值的；而 XSS 由于可以执行js代码，这也就使得攻击者可以将它想要的数据发送到自己的服务器上，比如前面 XSS 章中提到的回传 cookie。</li></ol>]]></content>
       
       
       
         <tags>
             
-            <tag> php </tag>
+            <tag> web安全 </tag>
             
         </tags>
       
@@ -102,14 +102,20 @@
       
       
       
+        <tags>
+            
+            <tag> web安全 </tag>
+            
+        </tags>
+      
     </entry>
     
     
     
     <entry>
-      <title>310随手记录</title>
-      <link href="/2023/03/10/0310-sui-shou-ji-lu/"/>
-      <url>/2023/03/10/0310-sui-shou-ji-lu/</url>
+      <title>windows命令</title>
+      <link href="/2023/03/10/windows-ming-ling/"/>
+      <url>/2023/03/10/windows-ming-ling/</url>
       
         <content type="html"><![CDATA[<blockquote><p>secpol.msc  “本地安全策略编辑器”</p></blockquote><blockquote><p>lsass.exe “Local Security Authority Service本地安全权限服务”</p></blockquote><blockquote><p>方括号中的字符串要放在引号中，单引号或双引号都可以。没有引号就是在访问变量 </p></blockquote>]]></content>
       
@@ -186,6 +192,12 @@
       
       
       
+        <tags>
+            
+            <tag> web安全 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -240,7 +252,7 @@
       
         <tags>
             
-            <tag> 安全 </tag>
+            <tag> web安全 </tag>
             
         </tags>
       
